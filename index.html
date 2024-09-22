@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="style.css">
 <html lang="en">
   <head>
-    <script src="script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <meta name="description" content="A brief description of the webpage">
     <meta charset="UTF-8">
@@ -82,21 +81,22 @@
                 Images
             </h2>
         </header>
-
-        <tr>
+        <table>
+          <tr>
             <td>
-                <img src="Image/APP.jpg" alt="Image/APP" />
+                <img class="zoom clickable" src="Image/APP.jpg" alt="Image/APP" data-link="visualizations.html"/>
             </td>
             <td>
-                <img src="Image/Maya.jpg" alt="Image/Maya" />
+                <img class="zoom clickable" src="Image/355_Class.jpg" alt="Image/355_Class" data-link="./visualizations.html" width="300" height=auto/>
             </td>
             <td>
-                <img src="Image/Mag.jpg" alt="Image/Maya"/>
+                <img class="zoom clickable" src="Image/Mag.jpg" alt="Image/Maya"data-link="visualizations.html"/>
             </td>
             <td>
-                <img src="Image/Micfilm.jpg" alt="Image/Micfilm"/>
+                <img class="zoom clickable" src="Image/Micfilm.jpg" alt="Image/Micfilm"data-link="visualizations.html"/>
             </td>
           </tr>
+        </table>
        </div>
 
        <div>
@@ -112,7 +112,9 @@
             
         </p>
        </div>
-    
+
+       <script src="main.js"></script>
+       <a href="./visualizations.html">Go to Visualizations</a>
     </main>
 
     
