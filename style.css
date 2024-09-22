@@ -1,0 +1,33 @@
+  p {
+    color: rgb(0, 0, 0);
+    font-family: 'Times New Roman', Times, serif ;
+    
+    font-size: 20px;
+  }
+
+
+
+  #intro {
+    color: rgb(0, 0, 0);
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif ;
+    font-weight: bold;
+    
+  }
+  #subtitle{
+    font-family: 'Times New Roman', Times, serif ;
+    font-weight: bold;
+    font-style: italic;
+    font-size:28px;
+  }
+
+  .highlight {
+    background-color: yellow;
+  }
+
+  .normal{
+    color: rgb(0, 0, 0);
+    font-family: 'Times New Roman', Times, serif ;
+    font-weight: bold;
+    font-size: 40px;
+  }
