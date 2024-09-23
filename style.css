@@ -219,11 +219,17 @@ footer {
     width: 100%;              
 
 }
-#chart-container, #line-chart-container {
-  margin-bottom: 50px; /* 在图表容器底部增加间距 */
+/*.chart {
+  width: 800px;
+  height: 500px;
+  border: 1px solid #ccc;
+}*/
+.profile-photo_chart {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
 }
-
-svg {
-  padding-top: 20px; /* 在图表内部增加顶部填充 */
+body {
+  background-color: #faf7f2; /* 设为淡米色 */
 }
 
