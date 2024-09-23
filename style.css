@@ -5,6 +5,13 @@
     font-size: 20px;
   }
 
+  #contactInfo_Text{
+    color: rgb(0, 0, 0);
+    font-family: 'Times New Roman', Times, serif ;
+    
+    font-size: 30px;
+  }
+
   #intro {
     color: rgb(0, 0, 0);
     font-size: 40px;
@@ -76,3 +83,80 @@
   height: auto;
   border-radius: 50%; /* 设置为圆形 */
 }
+
+/* 设置整个section的布局为flex */
+.content-section {
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    justify-content: space-between; /* 从左到右布局 */
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+/* 图片容器样式 */
+.image-container {
+    flex: 1; /* 图片占左边一部分 */
+    text-align: left;
+}
+
+/* 可调整大小的图片样式 */
+.resizable-image {
+    max-width: 100%; /* 确保图片不会超出容器的宽度 */
+    height: auto; /* 自动调整高度 */
+    border-radius: 10px; /* 圆角 */
+    border: 2px solid #333; /* 添加边框 */
+}
+
+/* 文本容器样式 */
+.text-container {
+    flex: 2; /* 右边文本占两部分 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 垂直居中 */
+    padding-left: 20px;
+}
+
+.text-container h2 {
+  color: rgb(0, 0, 0);
+  font-family: 'Times New Roman', Times, serif ;
+  
+    font-size: 40px;
+    margin-top: 0;
+    margin-left: 2;
+}
+
+.text-container p {
+    font-size: 1.2em;
+    line-height: 1.5;}
+
+
+
+    .image-gallery {
+      display: flex;
+      justify-content: space-between; /* 图片间具有均匀的空间 */
+      margin: 20px 0;
+      gap: 20px; /* 增加图片项之间的间隔 */
+    flex-wrap: wrap; /* 如果屏幕太窄，图片会自动换行 */
+  }
+  
+  /* 每个图片项的样式 */
+  .gallery-item {
+      text-align: center; /* 使图片和描述文字居中对齐 */
+      flex: 1; /* 平均分配每个图片项的空间 */
+      min-width: 200px; /* 确保每个图片项有最小宽度 */
+  }
+  
+  /* 图片样式 */
+  .zoom {
+    max-width: 100%; /* 图片最大宽度，确保不会超出容器 */
+    height: auto;
+  }
+  
+  /* 图片下面的文字描述样式 */
+  .gallery-item p {
+      font-size: 1em;
+      margin-top: 10px;
+  }
