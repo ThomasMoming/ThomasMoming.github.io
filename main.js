@@ -5,10 +5,18 @@ const images = document.querySelectorAll('.zoom');
 images.forEach(img => {
     img.addEventListener('mouseover', () => {
         img.style.transform = 'scale(1.2)';
+        const description = img.nextElementSibling;  // 获取图片下面的描述
+        if (description) {
+            description.style.transform = 'scale(1.2)';  // 描述文本跟随放大
+        }
     });
 
     img.addEventListener('mouseout', () => {
         img.style.transform = 'scale(1)';
+        const description = img.nextElementSibling;  // 获取图片下面的描述
+        if (description) {
+            description.style.transform = 'scale(1)';  // 描述文本恢复原状
+        }
     });
 });
 

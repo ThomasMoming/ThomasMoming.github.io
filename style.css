@@ -8,8 +8,15 @@
   #contactInfo_Text{
     color: rgb(0, 0, 0);
     font-family: 'Times New Roman', Times, serif ;
-    
+    margin-left: 250px;
     font-size: 30px;
+  }
+
+  #contactInfo_H{
+    color: rgb(0, 0, 0);
+    font-family: 'Times New Roman', Times, serif ;
+    padding-left: 100px;
+    font-size: 60px;
   }
 
   #intro {
@@ -57,7 +64,7 @@
 /* 超链接样式 */
 .navbar li a {
   display: block;
-  color: white; /* 文字颜色 */
+  color: white; 
   text-align: center;
   padding: 14px 20px; /* 内边距 */
   text-decoration: none; /* 去掉超链接下划线 */
@@ -65,7 +72,7 @@
 
 /* 悬停效果 */
 .navbar li a:hover {
-  background-color: #111; /* 悬停时背景色 */
+  background-color: #111; 
 }
 
 /* 设置标题和图片容器为flex布局 */
@@ -73,15 +80,15 @@
   display: flex;
   justify-content: space-between; /* 标题和图片两端对齐 */
   align-items: center; /* 垂直居中 */
-  background-color: #f4f4f4; /* 可选背景色 */
-  padding: 10px; /* 可选内边距 */
+  background-color: #f4f4f4; 
+  padding: 10px; 
 }
 
 /* 设置图片样式 */
 .profile-photo {
-  width: 150px; /* 设置图片宽度 */
+  width: 100px; /* 设置图片宽度 */
   height: auto;
-  border-radius: 50%; /* 设置为圆形 */
+  border-radius: 20%; /* 设置为圆形 */
 }
 
 /* 设置整个section的布局为flex */
@@ -123,9 +130,9 @@
   color: rgb(0, 0, 0);
   font-family: 'Times New Roman', Times, serif ;
   
-    font-size: 40px;
+    font-size: 30px;
     margin-top: 0;
-    margin-left: 2;
+    margin-left: 30;
 }
 
 .text-container p {
@@ -139,7 +146,7 @@
       justify-content: space-between; /* 图片间具有均匀的空间 */
       margin: 20px 0;
       gap: 20px; /* 增加图片项之间的间隔 */
-    flex-wrap: wrap; /* 如果屏幕太窄，图片会自动换行 */
+      flex-wrap: wrap; /* 如果屏幕太窄，图片会自动换行 */
   }
   
   /* 每个图片项的样式 */
@@ -160,3 +167,55 @@
       font-size: 1em;
       margin-top: 10px;
   }
+
+  .flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+/* 左边部分样式 */
+.left-section {
+  flex: 1;
+  margin-right: 20px;
+}
+
+/* 右边部分样式 */
+.right-section {
+  flex: 2;
+}
+/* 图片样式 */
+#profile-photo-me {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* 设置个人照片的样式 */
+.me-photo {
+  width: 350px; 
+  height: auto;
+  border-radius: 10px; /* 设置为方形，带圆角 */
+  margin-left: 50px;
+}
+
+/* Skills 样式 */
+.skills h2 {
+  margin-top: 0;
+}
+
+/* 调整文字和标题的间距 */
+.left-section h2 {
+    margin-bottom: 10px;
+}
+
+footer {
+    text-align: center;       
+    font-size: 10px;        
+    padding: 10px;            
+    position: absolute;       
+    bottom: 0;                
+    width: 100%;              
+
+}
