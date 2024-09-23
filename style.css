@@ -34,3 +34,45 @@
 
     transition: transform 0.5s ease; /* 添加平滑过渡效果 */
 }
+
+.navbar {
+  list-style-type: none; /* 移除列表默认样式 */
+  margin: 0;
+  padding: 0;
+  background-color: #333; /* 背景色 */
+  overflow: hidden;
+}
+
+.navbar li {
+  float: left; /* 列表水平排列 */
+}
+
+/* 超链接样式 */
+.navbar li a {
+  display: block;
+  color: white; /* 文字颜色 */
+  text-align: center;
+  padding: 14px 20px; /* 内边距 */
+  text-decoration: none; /* 去掉超链接下划线 */
+}
+
+/* 悬停效果 */
+.navbar li a:hover {
+  background-color: #111; /* 悬停时背景色 */
+}
+
+/* 设置标题和图片容器为flex布局 */
+.header-container {
+  display: flex;
+  justify-content: space-between; /* 标题和图片两端对齐 */
+  align-items: center; /* 垂直居中 */
+  background-color: #f4f4f4; /* 可选背景色 */
+  padding: 10px; /* 可选内边距 */
+}
+
+/* 设置图片样式 */
+.profile-photo {
+  width: 150px; /* 设置图片宽度 */
+  height: auto;
+  border-radius: 50%; /* 设置为圆形 */
+}
