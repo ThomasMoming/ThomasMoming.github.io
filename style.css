@@ -219,3 +219,11 @@ footer {
     width: 100%;              
 
 }
+#chart-container, #line-chart-container {
+  margin-bottom: 50px; /* 在图表容器底部增加间距 */
+}
+
+svg {
+  padding-top: 20px; /* 在图表内部增加顶部填充 */
+}
+
