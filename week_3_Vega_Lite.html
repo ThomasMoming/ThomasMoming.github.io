@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />  <!-- 加载 D3.js 库，用于可视化 -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>  <!-- 加载 Vega 库，Vega 是一个声明性可视化库 -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script> <!-- 加载 Vega-Lite 库，Vega-Lite 是基于 Vega 的简化可视化语法 -->
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script><!-- 加载 Vega-Lite 库，Vega-Lite 是基于 Vega 的简化可视化语法 -->
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite-api@5.6.0"></script><!-- 加载 Vega-Lite API 库，允许使用 JavaScript 编程方式生成 Vega-Lite 图表 -->
+    <script src="https://cdn.jsdelivr.net/npm/vega-tooltip"></script><!-- 加载 Vega Tooltip 插件，用于显示工具提示 -->
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script> <!-- 加载 Vega Embed 库，帮助将 Vega 和 Vega-Lite 可视化嵌入到网页中 -->
+    <link rel="stylesheet" href="week_3_style.css">
+    <script>
+        
+     const options = {
+        config: {
+          // Vega-Lite default configuration
+        },
+        init: (view) => {
+          // initialize tooltip handler
+          view.tooltip(new vegaTooltip.Handler().call);
+        },
+        view: {
+          // view constructor options
+          // remove the loader if you don't want to default to vega-datasets!
+          loader: vega.loader({
+            baseURL: "https://cdn.jsdelivr.net/npm/vega-datasets@2/",
+          }),
+          renderer: "canvas",
+        },
+      };
+
+      // register vega and vega-lite with the API
+      vl.register(vega, vegaLite, options);
+      </script>
+    <style>
+
+    </style>
+    <title>Week_3_Vega_Lite</title>
+  </head>
+
+
+  <body>
+    <div>
+        <h1>Global Sales by Genre and Platform</h1>  
+    </div>
+
+    <div class="container">
+      <!-- visualization goes into this div you can create multiple divs and give them IDs -->
+         <div id="view"></div>
+        </div>
+
+    <div>
+        <h1>Sales Over Time by Platform and Genre</h1>  
+    </div>
+
+    <div class="container">
+        <div id="view_line"></div>
+    </div>
+
+    <div>
+        <h1>Regional Sales by Platform</h1>  
+      </div>
+  
+      <div class="container">
+        <div id="view_stacked"></div>
+      </div>
+
+    <script type="module" src="week_3_vis.js"></script>
+  </body>
+</html>
