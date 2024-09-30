@@ -90,6 +90,31 @@ async function render() {
     .toSpec();
     
 
+    // Define portable platforms
+    const portablePlatforms = ['DS', '3DS', 'PSP', 'PS Vita', 'GBA', 'GB', 'NG', 'PSP', 'PSV', 'Switch']
+    const portableData = data.filter(d => portablePlatforms.includes(d.Platform));
+
+    // Create a stacked bar chart for portable platform sales by region
+    const vlPortableSpec = vl
+        .markBar()
+        .data(portableData)
+        .transform(
+            vl.fold(['NA_Sales', 'EU_Sales', 'JP_Sales', 'Other_Sales']).as('Region', 'Sales')
+        )
+        .encode(
+            vl.x().fieldN('Platform').title('Portable Platform'),
+            vl.y().fieldQ('Sales').aggregate('sum').title('Total Sales (in millions)'),
+            vl.color().fieldN('Region').title('Region')
+                .scale({
+                    range: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"]
+                })
+        )
+        .width(1500)
+        .height(800)
+        .toSpec();
+
+
+        
   
     // Render the bar chart
     vegaEmbed("#view", vlSpec).then((result) => {
@@ -108,6 +133,13 @@ async function render() {
         const view = result.view;
         view.run();
       });
+
+
+      // Render the portable platform visualization
+    vegaEmbed("#view_portable", vlPortableSpec).then((result) => {
+        const view = result.view;
+        view.run();
+    });
 }
 
 render();
