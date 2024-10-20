@@ -50,15 +50,17 @@
 }
 
 .navbar {
+  display: flex; /* 使用 Flexbox 布局 */
   list-style-type: none; /* 移除列表默认样式 */
   margin: 0;
   padding: 0;
   background-color: #333; /* 背景色 */
-  overflow: hidden;
+  overflow: visible;
 }
 
 .navbar li {
   float: left; /* 列表水平排列 */
+  position: relative; /* 为子菜单的绝对定位提供参考 */
 }
 
 /* 超链接样式 */
@@ -74,6 +76,43 @@
 .navbar li a:hover {
   background-color: #111; 
 }
+
+/* 下拉菜单隐藏初始状态 */
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000; /* 确保下拉菜单在页面中其他内容之上 */
+    }
+
+    /* 下拉菜单的显示样式 */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+    /* 子导航栏链接样式 */
+    .dropdown-menu li a {
+        padding: 10px 15px;
+        text-decoration: none;
+        display: block;
+        white-space: nowrap;
+        color: #333;
+    }
+
+    /* 子导航栏悬停效果 */
+    .dropdown-menu li a:hover {
+        background-color: #f0f0f0;
+    }
+
+
+
+
 
 /* 设置标题和图片容器为flex布局 */
 .header-container {
@@ -232,4 +271,6 @@ footer {
 body {
   background-color: #faf7f2; /* 设为淡米色 */
 }
+
+ 
 
