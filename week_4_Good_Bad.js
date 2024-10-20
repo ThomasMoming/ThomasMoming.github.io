@@ -114,7 +114,8 @@ async function drawVis() {
     .attr("y", -margin.top / 2)
     .attr("text-anchor", "middle")
     .style("font-size", "16px")
-    .style("text-decoration", "underline");
+    .style("text-decoration", "underline")
+    .text("Average Shot Distance Across Europe's Top 5 Leagues");
 
 
     // Add color legend
@@ -167,7 +168,223 @@ async function drawVis() {
     .attr("text-anchor", "middle")
     .style("font-size", "12px")
     .style("font-weight", "bold")
-    .text("Shot Distance");
+    .text("Shot Distance")
+
+    
+
 }
 
 drawVis();
+
+
+// New function to draw Global Sales by Genre and Platform
+async function drawSalesChart() {
+    const salesData = await d3.csv("./datasets/fake_videogames_sales.csv", d3.autoType);
+  
+    // Aggregate data by Genre and Platform
+    const nestedData = d3.rollups(
+      salesData,
+      v => d3.sum(v, d => parseFloat(d.Global_Sales)),
+      d => d.Genre,
+      d => d.Platform
+    );
+  
+    // Transform the nested data into a flat structure for easier use
+    const transformedData = [];
+    nestedData.forEach(([genre, platforms]) => {
+      platforms.forEach(([platform, sales]) => {
+        transformedData.push({ Genre: genre, Platform: platform, GlobalSales: sales });
+      });
+    });
+  
+    const genres = [...new Set(transformedData.map(d => d.Genre))];
+    const platforms = [...new Set(transformedData.map(d => d.Platform))];
+  
+    const salesMargin = { top: 50, right: 50, bottom: 100, left: 100 };
+    const salesWidth = 800 - salesMargin.left - salesMargin.right;
+    const salesHeight = 500 - salesMargin.top - salesMargin.bottom;
+  
+    const salesSvg = d3
+      .select("#visContainer")
+      .append("svg")
+      .attr("width", salesWidth + salesMargin.left + salesMargin.right)
+      .attr("height", salesHeight + salesMargin.top + salesMargin.bottom)
+      .append("g")
+      .attr("transform", `translate(${salesMargin.left}, ${salesMargin.top})`);
+  
+    const salesXScale = d3.scaleBand().domain(platforms).range([0, salesWidth]).padding(0.1);
+    const salesYScale = d3.scaleLinear().domain([0, d3.max(transformedData, d => d.GlobalSales)]).range([salesHeight, 0]);
+    const salesColorScale = d3.scaleOrdinal(d3.schemeCategory10).domain(genres);
+  
+    salesSvg
+      .selectAll("rect")
+      .data(transformedData)
+      .enter()
+      .append("rect")
+      .attr("x", d => salesXScale(d.Platform))
+      .attr("y", d => salesYScale(d.GlobalSales))
+      .attr("width", salesXScale.bandwidth())
+      .attr("height", d => salesHeight - salesYScale(d.GlobalSales))
+      .attr("fill", d => salesColorScale(d.Genre))
+      .attr("stroke", "black")
+      .attr("stroke-width", 0.5);
+  
+    salesSvg
+      .append("g")
+      .attr("transform", `translate(0, ${salesHeight})`)
+      .call(d3.axisBottom(salesXScale))
+      .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-0.8em")
+      .attr("dy", "0.15em")
+      .attr("transform", "rotate(-45)");
+  
+    salesSvg.append("g").call(d3.axisLeft(salesYScale));
+  
+    salesSvg
+      .append("text")
+      .attr("x", salesWidth / 2)
+      .attr("y", -salesMargin.top / 2)
+      .attr("text-anchor", "middle")
+      .style("font-size", "16px")
+      .style("text-decoration", "underline")
+      .text("Global Sales by Genre and Platform");
+  }
+  
+  drawSalesChart();
+
+
+  
+  // JavaScript 函数，用于绘制 Xbox 和 PlayStation 平台的各区域销售数据，调整了条形间距
+async function drawRegionSalesChart() {
+    // 从 CSV 文件中加载销售数据
+    const salesData = await d3.csv("./datasets/fake_videogames_sales.csv", d3.autoType);
+  
+    // 仅筛选 Xbox 和 PlayStation 平台的数据
+    const filteredData = salesData.filter(d => d.Platform === "XOne" || d.Platform === "360" || d.Platform === "PS3" || d.Platform === "PS4");
+  
+    // 打印所有可用平台
+    console.log("Available Platforms:", [...new Set(salesData.map(d => d.Platform))]);
+  
+    // 按平台和区域汇总数据
+    const nestedData = d3.rollups(
+      filteredData,
+      v => ({
+        NA_Sales: d3.sum(v, d => parseFloat(d.NA_Sales)),
+        EU_Sales: d3.sum(v, d => parseFloat(d.EU_Sales)),
+        JP_Sales: d3.sum(v, d => parseFloat(d.JP_Sales)),
+        Other_Sales: d3.sum(v, d => parseFloat(d.Other_Sales))
+      }),
+      d => (d.Platform === "PS3" || d.Platform === "PS4") ? "PS" : "Xbox" // 将 PS3 和 PS4 归为 PS，XOne 和 360 归为 Xbox
+    );
+  
+    // 将嵌套数据转换为完整的平坦结构，确保所有平台都有数据
+    const platformsData = ["PS", "Xbox"];
+    const transformedData = platformsData.flatMap(platform => {
+      const sales = nestedData.find(d => d[0] === platform)?.[1] || { NA_Sales: 0, EU_Sales: 0, JP_Sales: 0, Other_Sales: 0 };
+      return [
+        { Platform: platform, Region: "NA_Sales", Sales: sales.NA_Sales },
+        { Platform: platform, Region: "EU_Sales", Sales: sales.EU_Sales },
+        { Platform: platform, Region: "JP_Sales", Sales: sales.JP_Sales },
+        { Platform: platform, Region: "Other_Sales", Sales: sales.Other_Sales }
+      ];
+    });
+  
+    // 定义要在可视化中展示的平台和区域
+    const platforms = ["PS", "Xbox"];
+    const regions = [...new Set(transformedData.map(d => d.Region))];
+  
+    // 定义 SVG 容器的边距、宽度和高度
+    const regionMargin = { top: 50, right: 200, bottom: 100, left: 100 };
+    const regionWidth = 800 - regionMargin.left - regionMargin.right;
+    const regionHeight = 500 - regionMargin.top - regionMargin.bottom;
+  
+    // 创建 SVG 容器
+    const regionSvg = d3
+      .select("#visContainer")
+      .append("svg")
+      .attr("width", regionWidth + regionMargin.left + regionMargin.right)
+      .attr("height", regionHeight + regionMargin.top + regionMargin.bottom)
+      .append("g")
+      .attr("transform", `translate(${regionMargin.left}, ${regionMargin.top})`);
+  
+    // 定义 X 轴和 Y 轴的比例尺
+    const regionXScale = d3.scaleBand().domain(platforms).range([0, regionWidth]).padding(0.5);
+    const regionYScale = d3.scaleLinear().domain([0, d3.max(transformedData, d => d.Sales)]).range([regionHeight, 0]);
+    const regionColorScale = d3.scaleOrdinal().domain(regions).range(["#a6a6a6", "#89b7ff", "#7fd38c", "#ffe680"]);
+  
+    // 调整条形宽度以增加间距并使其更粗
+    const barWidth = regionXScale.bandwidth() / regions.length;
+  
+    // 创建条形组并添加表示销售数据的矩形
+    regionSvg
+      .selectAll("g.bar-group")
+      .data(transformedData)
+      .enter()
+      .append("g")
+      .attr("class", "bar-group")
+      .attr("transform", d => `translate(${regionXScale(d.Platform)}, 0)`)
+      .append("rect")
+      .attr("y", d => regionYScale(d.Sales))
+      .attr("width", barWidth)
+      .attr("height", d => regionHeight - regionYScale(d.Sales))
+      .attr("x", d => barWidth * regions.indexOf(d.Region))
+      .attr("fill", d => regionColorScale(d.Region));
+  
+    // 添加 X 轴，显示平台名称
+    regionSvg
+      .append("g")
+      .attr("transform", `translate(0, ${regionHeight})`)
+      .call(d3.axisBottom(regionXScale))
+      .selectAll("text")
+      .style("text-anchor", "end")
+      .attr("dx", "-0.8em")
+      .attr("dy", "0.15em")
+      .attr("transform", "rotate(-45)");
+  
+    // 添加 Y 轴
+    regionSvg.append("g").call(d3.axisLeft(regionYScale));
+  
+    // 为图表添加标题
+    regionSvg
+      .append("text")
+      .attr("x", regionWidth / 2)
+      .attr("y", -regionMargin.top / 2)
+      .attr("text-anchor", "middle")
+      .style("font-size", "16px")
+      .style("text-decoration", "underline")
+      .text("Sales Data by Region for Xbox and PlayStation Platforms");
+  
+    // 为各区域添加图例
+    const legend = regionSvg
+      .append("g")
+      .attr("transform", `translate(${regionWidth + 20}, 0)`);
+  
+    // 为每个区域创建图例条目
+    regions.forEach((region, i) => {
+      legend
+        .append("rect")
+        .attr("x", 0)
+        .attr("y", i * 20)
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", regionColorScale(region));
+  
+      legend
+        .append("text")
+        .attr("x", 25)
+        .attr("y", i * 20 + 9)
+        .attr("dy", "0.35em")
+        .text(region);
+    });
+  }
+  
+  // 执行函数以绘制图表
+  drawRegionSalesChart();
+
+
+  
+  
+  
+  
+  
