@@ -97,6 +97,26 @@ data.forEach((value, index) => {
   dot.setAttribute('fill', 'rgba(75, 192, 192, 1)');
   lineChart.appendChild(dot);
 
+  // 添加鼠标悬停显示 y 轴对应信息
+  dot.addEventListener('mouseenter', (event) => {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip';
+    tooltip.textContent = `Value: ${value}`;
+    tooltip.style.position = 'absolute';
+    tooltip.style.left = `${event.pageX + 10}px`;
+    tooltip.style.top = `${event.pageY - 20}px`;
+    tooltip.style.padding = '5px';
+    tooltip.style.background = '#333';
+    tooltip.style.color = '#fff';
+    tooltip.style.borderRadius = '4px';
+    tooltip.style.pointerEvents = 'none';
+    document.body.appendChild(tooltip);
+
+    dot.addEventListener('mouseleave', () => {
+      document.body.removeChild(tooltip);
+    });
+  });
+
   // 添加X轴标签
   const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
   label.setAttribute('x', x);
