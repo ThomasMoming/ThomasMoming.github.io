@@ -1,0 +1,72 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
+  
+  /* Header 样式 */
+  header {
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: space-between; /* 主轴两端对齐 */
+    align-items: center; /* 交叉轴居中对齐 */
+    background: rgb(233, 242, 107); /* 设置背景颜色为黄色 */
+    padding: 10px 20px; /* 内边距 */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+  }
+  
+  /* Logo box 样式 */
+  .logo-box {
+    display: flex; /* 使内容按行排列 */
+    align-items: center; /* 居中对齐图片 */
+    padding: 5px; /* 给 logo 外边框增加一些内边距 */
+    background: black; /* 设置背景为黑色 */
+    border-radius: 0px; /* 设置圆角边框 */
+  }
+  
+  .logo {
+    max-height: 50px; /* 限制 logo 的最大高度 */
+    max-width: 100px; /* 限制 logo 的最大宽度 */
+  }
+  
+  /* 导航菜单样式 */
+  nav ul {
+    list-style: none; /* 移除列表的默认样式 */
+    display: flex; /* 使用 Flexbox 排列 */
+    gap: 20px; /* 设置列表项之间的间距 */
+  }
+  
+  nav ul li a {
+    text-decoration: none; /* 移除下划线 */
+    font-size: 16px; /* 设置字体大小 */
+    font-weight: bold; /* 设置字体粗细 */
+    color: black; /* 默认文字颜色 */
+    transition: all 0.3s ease; /* 添加过渡效果 */
+    position: relative; /* 为下划线效果定位 */
+  }
+  
+  nav ul li a:hover {
+    color: green; /* 鼠标悬停时文字变为绿色 */
+  }
+  
+  /* 下划线 hover 效果 */
+  nav ul li a::after {
+    content: ""; /* 伪元素内容为空 */
+    position: absolute; /* 绝对定位 */
+    left: 0; /* 从左侧开始 */
+    bottom: -3px; /* 离文字底部一定距离 */
+    width: 0; /* 初始宽度为 0 */
+    height: 2px; /* 设置下划线高度 */
+    background: green; /* 设置下划线颜色 */
+    transition: width 0.3s ease; /* 添加宽度变化动画 */
+  }
+  
+  nav ul li a:hover::after {
+    width: 100%; /* 鼠标悬停时，下划线宽度扩展到 100% */
+  }
+  
